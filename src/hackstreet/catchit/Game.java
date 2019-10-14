@@ -3,18 +3,15 @@ package hackstreet.catchit;
 public class Game {
 
     private Grid grid;
-
     private Basket basket;
-
     private GameObject[] gameObjects;
+    private int points;
 
-    private int numberOfGameObjects;
 
     public Game(int numberOfGameObjects) {
 
-        grid = new Grid(20, 20);
+        grid = new Grid(40, 20);
         this.basket = new Basket(grid);
-        this.numberOfGameObjects = numberOfGameObjects;
         gameObjects = createGameObjects(numberOfGameObjects);
 
     }
@@ -33,11 +30,25 @@ public class Game {
 
     }
 
+    public void init() {
+
+        grid.init();
+        basket.init();
+
+
+    }
+
+
+
     public void start() throws InterruptedException {
 
         for(GameObject gameObject: gameObjects){
-
+            gameObject.init();
             this.fall(gameObject);
+            System.out.println(gameObject.getCol());
+            System.out.println(basket.getCol());
+            checkCatch(gameObject);
+            System.out.println(points);
 
         }
 
@@ -46,12 +57,20 @@ public class Game {
 
     private void fall(GameObject object) throws InterruptedException{
 
-        for (int x = 0; x < grid.getRows(); x++) {
+        for (int x = 0; x < grid.getRows()-1; x++) {
 
             object.fall();
-            Thread.sleep(200);
+            Thread.sleep(100);
 
         }
+    }
+
+    private void checkCatch(GameObject object){
+
+        if(Math.abs(basket.getCol()-object.getCol()) <= 1){
+            points =+ object.getPoints();
+        }
+
     }
 
 }
