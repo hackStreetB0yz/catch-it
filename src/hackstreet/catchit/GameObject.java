@@ -25,7 +25,6 @@ public abstract class GameObject {
 
         gridPosition.setPos(gridPosition.getCol(), gridPosition.getRow()+1);
         picture.translate(0,grid.getCellSize());
-        System.out.println(gridPosition.getRow());
 
     }
 

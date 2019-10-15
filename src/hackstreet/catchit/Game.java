@@ -45,8 +45,6 @@ public class Game {
         for(GameObject gameObject: gameObjects){
             gameObject.init();
             this.fall(gameObject);
-            System.out.println(gameObject.getCol());
-            System.out.println(basket.getCol());
             checkCatch(gameObject);
             System.out.println(points);
 
@@ -68,7 +66,7 @@ public class Game {
     private void checkCatch(GameObject object){
 
         if(Math.abs(basket.getCol()-object.getCol()) <= 1){
-            points =+ object.getPoints();
+            points += object.getPoints();
         }
 
     }
