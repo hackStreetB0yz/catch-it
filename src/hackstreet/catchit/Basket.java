@@ -42,7 +42,7 @@ public class Basket {
 
     public void init(){
 
-        rectangle = new Rectangle(grid.colToX(position.getCol()-1), grid.rowToY(position.getRow()-1),90,30 );
+        rectangle = new Rectangle(grid.colToX(position.getCol()-10), grid.rowToY(position.getRow()-10),90,30 );
         rectangle.draw();
         rectangle.setColor(Color.BLUE);
         rectangle.fill();
@@ -57,6 +57,24 @@ public class Basket {
     public int getCol(){
 
         return position.getCol();
+
+    }
+
+    public void goLeft(){
+
+        position.setPos(position.getCol() - 10, grid.getRows());
+
+    }
+
+    public void goRight(){
+
+        position.setPos(position.getCol() - 10, grid.getRows());
+
+    }
+
+    public void drawLeft(){
+
+      //  rectangle.translate();
 
     }
 

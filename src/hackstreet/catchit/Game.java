@@ -10,7 +10,7 @@ public class Game {
 
     public Game(int numberOfGameObjects) {
 
-        grid = new Grid(40, 20);
+        grid = new Grid(400, 200);
         this.basket = new Basket(grid);
         gameObjects = createGameObjects(numberOfGameObjects);
 
@@ -42,6 +42,8 @@ public class Game {
 
     public void start() throws InterruptedException {
 
+        Thread.sleep(2000);
+
         for(GameObject gameObject: gameObjects){
             gameObject.init();
             this.fall(gameObject);
@@ -55,17 +57,17 @@ public class Game {
 
     private void fall(GameObject object) throws InterruptedException{
 
-        for (int x = 0; x < grid.getRows()-1; x++) {
+        for (int x = 0; x < grid.getRows()-10; x++) {
 
             object.fall();
-            Thread.sleep(100);
+            Thread.sleep(20);
 
         }
     }
 
     private void checkCatch(GameObject object){
 
-        if(Math.abs(basket.getCol()-object.getCol()) <= 1){
+        if(Math.abs(basket.getCol()-object.getCol()) <= 10){
             points += object.getPoints();
         }
 
