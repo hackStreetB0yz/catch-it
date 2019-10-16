@@ -105,7 +105,7 @@ public class Basket implements KeyboardHandler{
         if(getCol() > 0) {
             position.setPos(position.getCol() - 10, grid.getRows());
             drawLeft();
-            System.out.println(getCol());
+            //System.out.println(getCol());
         }
     }
 
@@ -114,7 +114,7 @@ public class Basket implements KeyboardHandler{
         if(getCol() < (grid.getCols()-(rectangle.getWidth()/grid.getCellSize()))) {
             position.setPos(position.getCol() + 10, grid.getRows());
             drawRight();
-            System.out.println(getCol());
+            //System.out.println(getCol());
         }
 
     }

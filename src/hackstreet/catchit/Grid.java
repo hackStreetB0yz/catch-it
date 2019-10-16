@@ -4,6 +4,7 @@ import java.awt.*;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Grid {
 
@@ -27,6 +28,9 @@ public class Grid {
         rectangle.draw();
         rectangle.setColor(Color.DARK_GRAY);
         rectangle.fill();
+        //Picture picture = new Picture(10,10,"/Users/stevenduijvesteijn/Documents/bootcamp/" +
+        //        "hackstreet/catch-it/pictures/background2.jpg");
+        //picture.draw();
 
 
     }

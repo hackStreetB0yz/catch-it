@@ -32,8 +32,8 @@ public abstract class GameObject {
 
     public GridPosition randomStartPosition(){
 
-        int startColumn = (int) (Math.random()* grid.getCols()); // changed it
-        //System.out.println(grid.getCols());
+        int startColumn = (int) (Math.random()* (grid.getCols()-10)); // changed it
+        // 10 = 30(width in columns flower) / 3 (cellsize); "flowers need 10 columns space"
         //System.out.println(startColumn);
         return new GridPosition(startColumn,0,grid);
 
@@ -42,8 +42,7 @@ public abstract class GameObject {
     protected void init(){
 
         picture = new Picture(grid.colToX(gridPosition.getCol()), 10,pictureLink);
-        System.out.println(picture.getX());
-        System.out.println(picture.getWidth());
+        //System.out.println(picture.getX());
         picture.draw();
 
     }

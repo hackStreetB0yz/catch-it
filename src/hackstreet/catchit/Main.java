@@ -1,5 +1,6 @@
 package hackstreet.catchit;
 
+import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Main {
