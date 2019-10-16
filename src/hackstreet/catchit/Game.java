@@ -67,7 +67,9 @@ public class Game {
 
     private void checkCatch(GameObject object){
 
-        if(Math.abs(basket.getCol()-object.getCol()) <= 30){    //calculate again
+        System.out.println("flower col:" + object.getCol());
+        System.out.println("basket col:" + basket.getCol());
+        if(object.getCol() > basket.getCol()-9 && object.getCol() < basket.getCol() + 21){    //calculate again
             points += object.getPoints();
         }
 
