@@ -4,9 +4,13 @@ import java.awt.*;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 
-public class Basket {
+public class Basket implements KeyboardHandler{
 
     private int points;
     private Rectangle rectangle;
@@ -16,7 +20,7 @@ public class Basket {
     public Basket (Grid grid){
 
         this.points = 0;
-        position = new GridPosition(grid.getCols()/2,grid.getRows(), grid);
+        position = new GridPosition(200,grid.getRows(), grid);
         this.grid = grid;
 
     }
@@ -42,10 +46,11 @@ public class Basket {
 
     public void init(){
 
-        rectangle = new Rectangle(grid.colToX(position.getCol()-10), grid.rowToY(position.getRow()-10),90,30 );
+        rectangle = new Rectangle(grid.colToX(position.getCol()), grid.rowToY(position.getRow()-10),90,30 );
         rectangle.draw();
         rectangle.setColor(Color.BLUE);
         rectangle.fill();
+        Keyboard();
     }
 
     public GridPosition getPosition(){
@@ -60,21 +65,69 @@ public class Basket {
 
     }
 
+    public void Keyboard() {
+
+        Keyboard keyboard = new Keyboard(this);
+
+        KeyboardEvent leftArrowPress = new KeyboardEvent();
+        leftArrowPress.setKey(KeyboardEvent.KEY_LEFT);
+        leftArrowPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        KeyboardEvent rightArrowPress = new KeyboardEvent();
+        rightArrowPress.setKey(KeyboardEvent.KEY_RIGHT);
+        rightArrowPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        keyboard.addEventListener(leftArrowPress);
+        keyboard.addEventListener(rightArrowPress);
+    }
+
+
+    @Override
+    public void keyPressed(KeyboardEvent keyboardEvent) {
+
+        switch (keyboardEvent.getKey()) {
+            case KeyboardEvent.KEY_LEFT:
+                goLeft();
+                break;
+            case KeyboardEvent.KEY_RIGHT:
+                goRight();
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyboardEvent keyboardEvent) {
+
+    }
+
     public void goLeft(){
 
-        position.setPos(position.getCol() - 10, grid.getRows());
-
+        if(getCol() > 0) {
+            position.setPos(position.getCol() - 10, grid.getRows());
+            drawLeft();
+            System.out.println(getCol());
+        }
     }
 
     public void goRight(){
 
-        position.setPos(position.getCol() - 10, grid.getRows());
+        if(getCol() < (grid.getCols()-(rectangle.getWidth()/grid.getCellSize()))) {
+            position.setPos(position.getCol() + 10, grid.getRows());
+            drawRight();
+            System.out.println(getCol());
+        }
 
     }
 
     public void drawLeft(){
 
-      //  rectangle.translate();
+        rectangle.translate(-30,0);
+
+    }
+
+    public void drawRight(){
+
+        rectangle.translate(30, 0);
 
     }
 

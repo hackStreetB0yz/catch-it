@@ -67,7 +67,7 @@ public class Game {
 
     private void checkCatch(GameObject object){
 
-        if(Math.abs(basket.getCol()-object.getCol()) <= 10){
+        if(Math.abs(basket.getCol()-object.getCol()) <= 30){    //calculate again
             points += object.getPoints();
         }
 
