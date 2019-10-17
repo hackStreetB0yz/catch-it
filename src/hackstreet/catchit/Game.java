@@ -1,5 +1,7 @@
 package hackstreet.catchit;
 
+import hackstreet.catchit.gameobjects.Flower;
+
 public class Game {
 
     private Grid grid;
@@ -62,7 +64,7 @@ public class Game {
         for (int x = 0; x < grid.getRows()-10; x++) {
 
             object.fall();
-            Thread.sleep(20);
+            Thread.sleep(5);
 
         }
     }

@@ -30,7 +30,11 @@ public class Grid {
         rectangle.fill();
         //Picture picture = new Picture(10,10,"/Users/stevenduijvesteijn/Documents/bootcamp/" +
         //        "hackstreet/catch-it/pictures/background2.jpg");
-        //picture.draw();
+
+        Picture picture = new Picture(10,10,"/Users/codecadet/Documents/exercises/catch-it/pictures/background2.jpg");
+
+
+        picture.draw();
 
 
     }
