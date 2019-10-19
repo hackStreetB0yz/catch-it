@@ -28,10 +28,10 @@ public class Grid {
         rectangle.draw();
         rectangle.setColor(Color.DARK_GRAY);
         rectangle.fill();
-        //Picture picture = new Picture(10,10,"/Users/stevenduijvesteijn/Documents/bootcamp/" +
-        //        "hackstreet/catch-it/pictures/background2.jpg");
+        Picture picture = new Picture(10,10,"/Users/stevenduijvesteijn/Documents/bootcamp/" +
+                "hackstreet/catch-it/pictures/background2.jpg");
 
-        Picture picture = new Picture(10,10,"/Users/codecadet/Documents/exercises/catch-it/pictures/background2.jpg");
+        //Picture picture = new Picture(10,10,"/Users/codecadet/Documents/exercises/catch-it/pictures/background2.jpg");
 
 
         picture.draw();

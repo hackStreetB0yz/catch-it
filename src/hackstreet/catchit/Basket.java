@@ -8,48 +8,29 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public class Basket implements KeyboardHandler{
 
-    private int points;
-    private Rectangle rectangle;
+    private Picture picture;
     private GridPosition position;
     private Grid grid;
+    private static final String PICTURELINK = "/Users/stevenduijvesteijn/Documents/bootcamp/hackstreet/catch-it/pictures/basket.png";
+
 
     public Basket (Grid grid){
 
-        this.points = 0;
         position = new GridPosition(200,grid.getRows(), grid);
         this.grid = grid;
 
     }
 
-    public void setPoints(int points){
-
-        this.points += points;
-
-    }
-
-    public void move(){         // receives a direction and will call move(right) or move(left)
-
-        //TODO
-
-    }
-
-    public void setPosition(int col, int row){
-
-        position.setPos(col, row);
-        System.out.println(this.position);
-
-    }
-
     public void init(){
 
-        rectangle = new Rectangle(grid.colToX(position.getCol()), grid.rowToY(position.getRow()-10),90,30 );
-        rectangle.draw();
-        rectangle.setColor(Color.BLUE);
-        rectangle.fill();
+        picture = new Picture(grid.colToX(position.getCol()),grid.rowToY(position.getRow()-20),PICTURELINK);
+        picture.draw();
+
         Keyboard();
     }
 
@@ -105,30 +86,32 @@ public class Basket implements KeyboardHandler{
         if(getCol() > 0) {
             position.setPos(position.getCol() - 10, grid.getRows());
             drawLeft();
-            //System.out.println(getCol());
         }
     }
 
     public void goRight(){
 
-        if(getCol() < (grid.getCols()-(rectangle.getWidth()/grid.getCellSize()))) {
+        if(getCol() < (grid.getCols()-(picture.getWidth()/grid.getCellSize()))) {
             position.setPos(position.getCol() + 10, grid.getRows());
             drawRight();
-            //System.out.println(getCol());
         }
 
     }
 
     public void drawLeft(){
 
-        rectangle.translate(-30,0);
+        picture.translate(-30,0);
 
     }
 
     public void drawRight(){
 
-        rectangle.translate(30, 0);
+        picture.translate(30, 0);
 
+    }
+
+    public int getWidthColums(){
+        return 60; // returns width of picture in columns
     }
 
 }

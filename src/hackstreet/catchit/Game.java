@@ -1,6 +1,9 @@
 package hackstreet.catchit;
 
 import hackstreet.catchit.gameobjects.Flower;
+import hackstreet.catchit.gameobjects.Head;
+import hackstreet.catchit.gameobjects.Head2;
+import hackstreet.catchit.gameobjects.Head3;
 
 public class Game {
 
@@ -24,9 +27,16 @@ public class Game {
 
         gameObjects = new GameObject[numberOfGameObjects];
 
-        for (int i = 0; i < gameObjects.length; i++){
-
-            gameObjects[i] = new Flower(grid);
+        for (int i = 0; i < gameObjects.length; i++) {
+            int random = (int) (Math.random() * 10) + 1;
+            if (random < 3) {
+                gameObjects[i] = new Head(grid);
+            }
+            else if(random > 7) {
+                gameObjects[i] = new Head2(grid);
+            } else {
+                gameObjects[i] = new Head2(grid);
+            }
 
         }
 
@@ -44,12 +54,11 @@ public class Game {
     }
 
 
-
     public void start() throws InterruptedException {
 
         Thread.sleep(2000);
 
-        for(GameObject gameObject: gameObjects){
+        for (GameObject gameObject : gameObjects) {
             gameObject.init();
             this.fall(gameObject);
             checkCatch(gameObject);
@@ -59,23 +68,23 @@ public class Game {
     }
 
 
-    private void fall(GameObject object) throws InterruptedException{
+    private void fall(GameObject object) throws InterruptedException {
 
-        for (int x = 0; x < grid.getRows()-10; x++) {
+        for (int x = 0; x < grid.getRows() - 10; x++) {
 
             object.fall();
-            Thread.sleep(5);
+            Thread.sleep(object.getSpeed());
 
         }
     }
 
-    private void checkCatch(GameObject object){
 
-        //System.out.println("flower col:" + object.getCol());
-        //System.out.println("basket col:" + basket.getCol());
-        if (basket.getCol() - object.getCol() > -30 && basket.getCol() - object.getCol() < 10) {
+    private void checkCatch(GameObject object) {
+
+        if (basket.getCol() - object.getCol() > -basket.getWidthColums() && basket.getCol() - object.getCol() < object.getWidthColumns()) {
             //difference can not be 10 or bigger.
-            // 10 = number of rows calculated by dividing width(pixels) of picture by cellsize (30/3).
+
+            // 20 = number of rows calculated by dividing width(pixels) of picture by cellsize (60/3).
             points.updatePoints(object.getPoints());
         }
 
