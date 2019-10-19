@@ -21,19 +21,6 @@ public abstract class GameObject {
         this.widthColumns = widthColumns;
     }
 
-    protected void fall() {
-
-        gridPosition.setPos(gridPosition.getCol(), gridPosition.getRow() + 1);
-        if (gridPosition.getRow() < grid.getRows()) {
-            picture.translate(0, grid.getCellSize());
-            // System.out.println(gridPosition.getRow());
-        }
-        if (gridPosition.getRow() == (grid.getRows() - (picture.getHeight() / grid.getCellSize()))) {
-            picture.delete();
-        }
-
-    }
-
 
     public GridPosition randomStartPosition() {
 
@@ -43,11 +30,21 @@ public abstract class GameObject {
 
     }
 
-    protected void init() {
-
+    protected void init() throws InterruptedException{
         gridPosition = randomStartPosition();
-        picture = new Picture(grid.colToX(gridPosition.getCol()), 10, pictureLink);
+        picture = new Picture(grid.colToX(gridPosition.getCol()), 10,pictureLink);
         picture.draw();
+        for (int x = 0; x < grid.getRows()-10; x++) {
+            gridPosition.setPos(gridPosition.getCol(), gridPosition.getRow() + 1);
+            if (gridPosition.getRow() < grid.getRows()) {
+                picture.translate(0, grid.getCellSize());
+
+            }
+            if (gridPosition.getRow() == (grid.getRows() - (picture.getHeight() / grid.getCellSize()))) {
+                picture.delete();
+            }
+            Thread.sleep(20);
+        }
 
     }
 

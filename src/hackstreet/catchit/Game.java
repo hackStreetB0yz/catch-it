@@ -6,10 +6,11 @@ import hackstreet.catchit.gameobjects.Head2;
 import hackstreet.catchit.gameobjects.Head3;
 
 public class Game {
-
+    private static final int NUMBER_OF_OBJECTS = 50;
     private Grid grid;
     private Basket basket;
     private GameObject[] gameObjects;
+    private Thread[] threads;
     private Points points;
 
 
@@ -19,7 +20,7 @@ public class Game {
         this.basket = new Basket(grid);
         points = new Points(grid);
         gameObjects = createGameObjects(numberOfGameObjects);
-
+        threads = createThreads(numberOfGameObjects);
 
     }
 
@@ -44,6 +45,25 @@ public class Game {
 
     }
 
+    private Thread[] createThreads(int numberOfObjects){
+        threads = new Thread[numberOfObjects];
+        for(int i = 0; i < numberOfObjects; i++){
+            int finalI = i;
+            threads[i] = new Thread(new Runnable(){public void run(){
+                System.out.println("final I ::: "+finalI);
+                try {
+                    gameObjects[finalI].init();
+                    checkCatch(gameObjects[finalI]);
+                    Thread.sleep(gameObjects[finalI].getSpeed());
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+            }});
+        }
+
+        return threads;
+    }
+
     public void init() {
 
         grid.init();
@@ -58,13 +78,13 @@ public class Game {
 
         Thread.sleep(2000);
 
-        for (GameObject gameObject : gameObjects) {
-            gameObject.init();
-            this.fall(gameObject);
-            checkCatch(gameObject);
-
+        int sleepTime = 700;
+        for(Thread thread: threads) {
+            thread.start();
+            Thread.sleep(sleepTime);
+            System.out.println("Point: " + points);
+            sleepTime += 100;
         }
-
     }
 
 
@@ -72,7 +92,7 @@ public class Game {
 
         for (int x = 0; x < grid.getRows() - 10; x++) {
 
-            object.fall();
+
             Thread.sleep(object.getSpeed());
 
         }
