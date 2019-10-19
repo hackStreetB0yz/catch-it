@@ -1,9 +1,6 @@
 package hackstreet.catchit;
 
-import hackstreet.catchit.gameobjects.Flower;
-import hackstreet.catchit.gameobjects.Head;
-import hackstreet.catchit.gameobjects.Head2;
-import hackstreet.catchit.gameobjects.Head3;
+import hackstreet.catchit.gameobjects.*;
 
 public class Game {
 
@@ -31,11 +28,12 @@ public class Game {
             int random = (int) (Math.random() * 10) + 1;
             if (random < 3) {
                 gameObjects[i] = new Head(grid);
-            }
-            else if(random > 7) {
+            } else if (random > 8) {
                 gameObjects[i] = new Head2(grid);
+            } else if (random > 6) {
+                gameObjects[i] = new Head3(grid);
             } else {
-                gameObjects[i] = new Head2(grid);
+                gameObjects[i] = new Head4(grid);
             }
 
         }
