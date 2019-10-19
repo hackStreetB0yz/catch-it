@@ -16,7 +16,7 @@ public class Basket implements KeyboardHandler{
     private Picture picture;
     private GridPosition position;
     private Grid grid;
-    private static final String PICTURELINK = "/home/amrit/Documents/repos/catch-it/pictures/basket.png";
+    private static final String PICTURELINK = "/resources/basket.png";
 
 
     public Basket (Grid grid){
