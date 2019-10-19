@@ -5,13 +5,13 @@ import hackstreet.catchit.Grid;
 
 public class Head3 extends GameObject {
 
-    private static final int POINTS = 80;
-    private static final int SPEED = 8; // the higher the slower..
+    private static final int POINTS = 50;
+    private static final int SPEED = 10; // the higher the slower..
 
-    private static final String PICTURELINK = "/resources/steve.png";
+    private static final String PICTURELINK = "/resources/steve-small.png";
 
 
-    private static final int WIDTHCOLUMNS = 32;
+    private static final int WIDTHCOLUMNS = 20;
 
     public Head3(Grid grid){
 

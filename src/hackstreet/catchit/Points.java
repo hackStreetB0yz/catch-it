@@ -17,7 +17,7 @@ public class Points {
     public void init(){
 
         text = new Text(1000,50, "POINTS: 0");
-        text.setColor(Color.WHITE);
+        text.setColor(Color.BLACK);
         text.grow(80,50);
         text.draw();
     }

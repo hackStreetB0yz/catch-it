@@ -43,7 +43,7 @@ public abstract class GameObject {
             if (gridPosition.getRow() == (grid.getRows() - (picture.getHeight() / grid.getCellSize()))) {
                 picture.delete();
             }
-            Thread.sleep(20);
+            Thread.sleep(8);
         }
 
     }

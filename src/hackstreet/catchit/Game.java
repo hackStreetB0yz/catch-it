@@ -1,6 +1,7 @@
 package hackstreet.catchit;
 
 import hackstreet.catchit.gameobjects.*;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
     private Grid grid;
@@ -8,6 +9,7 @@ public class Game {
     private GameObject[] gameObjects;
     private Thread[] threads;
     private Points points;
+    private Picture finishBanner;
 
 
     public Game(int numberOfGameObjects) {
@@ -75,12 +77,15 @@ public class Game {
 
         Thread.sleep(2000);
 
-        int sleepTime = 2000;
+        int sleepTime = 1000;
         for(Thread thread: threads) {
             thread.start();
             Thread.sleep(sleepTime);
             //sleepTime += 100;
         }
+        Thread.sleep(1000);
+        basket.hide();
+        grid.finalBanner();
     }
 
 

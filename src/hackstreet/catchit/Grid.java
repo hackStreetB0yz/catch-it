@@ -32,6 +32,11 @@ public class Grid {
         picture.draw();
     }
 
+    public void finalBanner(){
+        Picture picture = new Picture(10,10,"/resources/finish-banner-transparent.png");
+        picture.draw();
+    }
+
     public int getCols() {
         return cols;
     }

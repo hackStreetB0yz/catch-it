@@ -34,6 +34,10 @@ public class Basket implements KeyboardHandler{
         Keyboard();
     }
 
+    public void hide(){
+        picture.delete();
+    }
+
     public GridPosition getPosition(){
 
         return position;
