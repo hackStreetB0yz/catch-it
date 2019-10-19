@@ -3,7 +3,6 @@ package hackstreet.catchit;
 import hackstreet.catchit.gameobjects.*;
 
 public class Game {
-    private static final int NUMBER_OF_OBJECTS = 50;
     private Grid grid;
     private Basket basket;
     private GameObject[] gameObjects;
@@ -48,7 +47,7 @@ public class Game {
         for(int i = 0; i < numberOfObjects; i++){
             int finalI = i;
             threads[i] = new Thread(new Runnable(){public void run(){
-                System.out.println("final I ::: "+finalI);
+
                 try {
                     gameObjects[finalI].init();
                     checkCatch(gameObjects[finalI]);
@@ -76,12 +75,11 @@ public class Game {
 
         Thread.sleep(2000);
 
-        int sleepTime = 700;
+        int sleepTime = 2000;
         for(Thread thread: threads) {
             thread.start();
             Thread.sleep(sleepTime);
-            System.out.println("Point: " + points);
-            sleepTime += 100;
+            //sleepTime += 100;
         }
     }
 
@@ -100,9 +98,7 @@ public class Game {
     private void checkCatch(GameObject object) {
 
         if (basket.getCol() - object.getCol() > -basket.getWidthColums() && basket.getCol() - object.getCol() < object.getWidthColumns()) {
-            //difference can not be 10 or bigger.
 
-            // 20 = number of rows calculated by dividing width(pixels) of picture by cellsize (60/3).
             points.updatePoints(object.getPoints());
         }
 
