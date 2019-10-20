@@ -17,9 +17,9 @@ public class Game implements KeyboardHandler {
     private GameObject[] gameObjects;
     private Thread[] threads;
     private Points points;
-    private Picture gameBanner = new Picture(10, 10, "/resources/background2.jpg");
-    private Picture finishBanner = new Picture(10, 10, "/resources/finish-banner-transparent.png");
-    private Picture startBanner = new Picture(10, 10, "/resources/startscreen.png");
+    private Picture gameBanner = new Picture(10, 10, "/resources/game-background.jpg");
+    private Picture finishBanner = new Picture(10, 10, "/resources/finish-banner.png");
+    private Picture startBanner = new Picture(10, 10, "/resources/start-banner.png");
     private boolean enterPressed = false;
     private boolean resetGame = false;
 
