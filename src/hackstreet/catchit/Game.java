@@ -3,13 +3,13 @@ package hackstreet.catchit;
 import hackstreet.catchit.gameobjects.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Game {
+public class Game{
     private Grid grid;
     private Basket basket;
     private GameObject[] gameObjects;
     private Thread[] threads;
     private Points points;
-    private Picture finishBanner;
+    private Picture finishBanner = new Picture(10,10,"/resources/finish-banner-transparent.png");
 
 
     public Game(int numberOfGameObjects) {
@@ -39,9 +39,7 @@ public class Game {
             }
 
         }
-
         return gameObjects;
-
     }
 
     private Thread[] createThreads(int numberOfObjects){
@@ -53,7 +51,6 @@ public class Game {
                 try {
                     gameObjects[finalI].init();
                     checkCatch(gameObjects[finalI]);
-                    Thread.sleep(gameObjects[finalI].getSpeed());
                 }catch (Exception e){
                     System.out.println(e);
                 }
@@ -63,13 +60,10 @@ public class Game {
         return threads;
     }
 
-    public void init() {
-
+    public void init(){
         grid.init();
         basket.init();
         points.init();
-
-
     }
 
 
@@ -81,22 +75,10 @@ public class Game {
         for(Thread thread: threads) {
             thread.start();
             Thread.sleep(sleepTime);
-            //sleepTime += 100;
         }
         Thread.sleep(1000);
         basket.hide();
-        grid.finalBanner();
-    }
-
-
-    private void fall(GameObject object) throws InterruptedException {
-
-        for (int x = 0; x < grid.getRows() - 10; x++) {
-
-
-            Thread.sleep(object.getSpeed());
-
-        }
+        finalBanner();
     }
 
 
@@ -108,5 +90,10 @@ public class Game {
         }
 
     }
+
+    public void finalBanner(){
+        finishBanner.draw();
+    }
+
 
 }
