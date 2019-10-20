@@ -3,6 +3,8 @@ package hackstreet.catchit;
 import hackstreet.catchit.gameobjects.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ConcurrentModificationException;
+
 public class Game{
     private Grid grid;
     private Basket basket;
@@ -51,7 +53,7 @@ public class Game{
                 try {
                     gameObjects[finalI].init();
                     checkCatch(gameObjects[finalI]);
-                }catch (Exception e){
+                }catch (InterruptedException e){
                     System.out.println(e);
                 }
             }});
@@ -71,12 +73,12 @@ public class Game{
 
         Thread.sleep(2000);
 
-        int sleepTime = 1000;
+        int sleepTime = 700;
         for(Thread thread: threads) {
             thread.start();
             Thread.sleep(sleepTime);
         }
-        Thread.sleep(1000);
+        Thread.sleep(1000); //wait until the last heads goes out
         basket.hide();
         finalBanner();
     }

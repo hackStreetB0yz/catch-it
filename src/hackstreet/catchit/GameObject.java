@@ -3,6 +3,8 @@ package hackstreet.catchit;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ConcurrentModificationException;
+
 public abstract class GameObject {
 
     private int points;
@@ -35,15 +37,21 @@ public abstract class GameObject {
         picture = new Picture(grid.colToX(gridPosition.getCol()), 10,pictureLink);
         picture.draw();
         for (int x = 0; x < grid.getRows()-10; x++) {
-            gridPosition.setPos(gridPosition.getCol(), gridPosition.getRow() + 1);
-            if (gridPosition.getRow() < grid.getRows()) {
-                picture.translate(0, grid.getCellSize());
 
+            gridPosition.setPos(gridPosition.getCol(), gridPosition.getRow() + 1);
+            if (gridPosition.getRow() < grid.getRows()- 20){
+                try{
+                    picture.translate(0, grid.getCellSize());
+                }catch (ConcurrentModificationException c){
+                    //TEMPORARY FIX
+                    picture.delete();
+                }
             }
             if (gridPosition.getRow() == (grid.getRows() - (picture.getHeight() / grid.getCellSize()))) {
                 picture.delete();
+                break;
             }
-            Thread.sleep(8);
+            Thread.sleep(speed);
         }
 
     }
@@ -54,9 +62,6 @@ public abstract class GameObject {
 
     }
 
-    public int getSpeed() {
-        return speed;
-    }
 
     public int getCol() {
 
