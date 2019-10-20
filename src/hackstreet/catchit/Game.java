@@ -1,17 +1,24 @@
 package hackstreet.catchit;
 
 import hackstreet.catchit.gameobjects.*;
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.ConcurrentModificationException;
 
-public class Game{
+public class Game implements KeyboardHandler {
     private Grid grid;
     private Basket basket;
     private GameObject[] gameObjects;
     private Thread[] threads;
     private Points points;
+    private Picture gameBanner = new Picture(10,10,"/resources/background2.jpg");
     private Picture finishBanner = new Picture(10,10,"/resources/finish-banner-transparent.png");
+    private Picture startBanner = new Picture(10, 10, "/resources/startscreen.jpg");
+    private boolean enterPressed = false;
 
 
     public Game(int numberOfGameObjects) {
@@ -62,10 +69,29 @@ public class Game{
         return threads;
     }
 
-    public void init(){
+
+    public void initStart() throws InterruptedException {
+
         grid.init();
+        startBanner();
+        keyboard();
+        while (!enterPressed) {
+            Thread.sleep(10);
+            if (enterPressed){
+                init();
+                break;
+            }
+        }
+    }
+
+    public void init() throws InterruptedException {
+
+        gameBanner();
         basket.init();
         points.init();
+        start();
+
+
     }
 
 
@@ -97,5 +123,53 @@ public class Game{
         finishBanner.draw();
     }
 
+    public void startBanner(){
+        startBanner.draw();
 
+    }
+
+    public void gameBanner() {
+        gameBanner.draw();
+    }
+
+    public void keyboard() {
+
+        Keyboard keyboard = new Keyboard(this);
+
+        KeyboardEvent enterPress = new KeyboardEvent();
+        enterPress.setKey(KeyboardEvent.KEY_ENTER);
+        enterPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        keyboard.addEventListener(enterPress);
+
+    }
+
+
+    @Override
+    public void keyPressed(KeyboardEvent keyboardEvent) {
+
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_ENTER) {
+
+            System.out.println("Enter");
+
+            try {
+                enterPressed = true;
+
+            } catch (Exception e) {
+                System.out.println("exception:" + e);
+            }
+
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyboardEvent keyboardEvent) {
+
+    }
 }
+
+
+
+
+
+

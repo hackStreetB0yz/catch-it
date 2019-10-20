@@ -32,8 +32,7 @@ public class Grid{
         rectangle.draw();
         rectangle.setColor(Color.DARK_GRAY);
         rectangle.fill();
-        Picture picture = new Picture(10,10,"/resources/background2.jpg");
-        picture.draw();
+
     }
 
 
