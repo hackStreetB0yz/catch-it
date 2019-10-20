@@ -17,8 +17,9 @@ public class Game implements KeyboardHandler {
     private Points points;
     private Picture gameBanner = new Picture(10,10,"/resources/background2.jpg");
     private Picture finishBanner = new Picture(10,10,"/resources/finish-banner-transparent.png");
-    private Picture startBanner = new Picture(10, 10, "/resources/startscreen.jpg");
+    private Picture startBanner = new Picture(10, 10, "/resources/startscreen.png");
     private boolean enterPressed = false;
+    private boolean resetGame = false;
 
 
     public Game(int numberOfGameObjects) {
@@ -99,7 +100,7 @@ public class Game implements KeyboardHandler {
 
         Thread.sleep(2000);
 
-        int sleepTime = 700;
+        int sleepTime = 900;
         for(Thread thread: threads) {
             thread.start();
             Thread.sleep(sleepTime);
@@ -107,7 +108,17 @@ public class Game implements KeyboardHandler {
         Thread.sleep(1000); //wait until the last heads goes out
         basket.hide();
         finalBanner();
+        keyboard();
+        while (!resetGame) {
+            Thread.sleep(10);
+            if (resetGame){
+                String[] strings = {""};
+                Main.main(strings);
+                break;
+            }
+        }
     }
+
 
 
     private void checkCatch(GameObject object) {
@@ -140,26 +151,25 @@ public class Game implements KeyboardHandler {
         enterPress.setKey(KeyboardEvent.KEY_ENTER);
         enterPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        KeyboardEvent resetPress = new KeyboardEvent();
+        resetPress.setKey(KeyboardEvent.KEY_R);
+        resetPress.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
         keyboard.addEventListener(enterPress);
+        keyboard.addEventListener(resetPress);
 
     }
-
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_ENTER) {
-
-            System.out.println("Enter");
-
-            try {
                 enterPressed = true;
-
-            } catch (Exception e) {
-                System.out.println("exception:" + e);
-            }
-
         }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_R){
+                resetGame = true;
+        }
+
     }
 
     @Override
