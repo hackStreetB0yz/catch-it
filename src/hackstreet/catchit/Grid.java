@@ -4,9 +4,13 @@ import java.awt.*;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Grid {
+public class Grid{
 
     public static final int PADDING = 10;
     private int cellSize = 3;
@@ -32,10 +36,6 @@ public class Grid {
         picture.draw();
     }
 
-    public void finalBanner(){
-        Picture picture = new Picture(10,10,"/resources/finish-banner-transparent.png");
-        picture.draw();
-    }
 
     public int getCols() {
         return cols;
