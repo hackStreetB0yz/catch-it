@@ -1,9 +1,7 @@
-package hackstreet.catchit;
+package hackstreet.catchit.gameEntities;
 
-import java.awt.*;
-
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import hackstreet.catchit.grid.Grid;
+import hackstreet.catchit.grid.GridPosition;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -11,46 +9,40 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class Basket implements KeyboardHandler{
+public class Basket implements KeyboardHandler {
 
+    private static final String PICTURE_LINK = "/resources/basket.png";
+    private static final int BASKET_COLUMN_SIZE = 200;
     private Picture picture;
     private GridPosition position;
     private Grid grid;
-    private static final String PICTURELINK = "/resources/basket.png";
 
 
-    public Basket (Grid grid){
+    public Basket(Grid grid) {
 
-        position = new GridPosition(200,grid.getRows(), grid);
+        position = new GridPosition(BASKET_COLUMN_SIZE, grid.getRows());
         this.grid = grid;
-
     }
 
-    public void init(){
+    public void init() {
 
-        picture = new Picture(grid.colToX(position.getCol()),grid.rowToY(position.getRow()-20),PICTURELINK);
+        picture = new Picture(grid.colToX(position.getCol()), grid.rowToY(position.getRow() - 20), PICTURE_LINK);
         picture.draw();
-
-        Keyboard();
+        basketKeyboard();
     }
 
-    public void hide(){
+    public void hide() {
+
         picture.delete();
     }
 
-    public GridPosition getPosition(){
 
-        return position;
-
-    }
-
-    public int getCol(){
+    public int getCol() {
 
         return position.getCol();
-
     }
 
-    public void Keyboard() {
+    private void basketKeyboard() {
 
         Keyboard keyboard = new Keyboard(this);
 
@@ -85,36 +77,36 @@ public class Basket implements KeyboardHandler{
 
     }
 
-    public void goLeft(){
+    public void goLeft() {
 
-        if(getCol() > 0) {
+        if (getCol() > 0) {
             position.setPos(position.getCol() - 10, grid.getRows());
             drawLeft();
         }
     }
 
-    public void goRight(){
+    public void goRight() {
 
-        if(getCol() < (grid.getCols()-(picture.getWidth()/grid.getCellSize()))) {
+        if (getCol() < (grid.getCols() - (picture.getWidth() / grid.getCellSize()))) {
             position.setPos(position.getCol() + 10, grid.getRows());
             drawRight();
         }
 
     }
 
-    public void drawLeft(){
+    public void drawLeft() {
 
-        picture.translate(-30,0);
+        picture.translate(-30, 0);
 
     }
 
-    public void drawRight(){
+    public void drawRight() {
 
         picture.translate(30, 0);
 
     }
 
-    public int getWidthColums(){
+    public int getWidthColumns() {
         return 60; // returns width of picture in columns
     }
 

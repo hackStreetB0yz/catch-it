@@ -1,6 +1,7 @@
-package hackstreet.catchit;
+package hackstreet.catchit.gameEntities.gameobjects;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import hackstreet.catchit.grid.Grid;
+import hackstreet.catchit.grid.GridPosition;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.ConcurrentModificationException;
@@ -12,7 +13,6 @@ public abstract class GameObject {
     private GridPosition gridPosition;
     private Grid grid;
     private String pictureLink;
-    private Picture picture;
     private int widthColumns;
 
     public GameObject(int points, int speed, Grid grid, String pictureLink, int widthColumns) {
@@ -24,52 +24,59 @@ public abstract class GameObject {
     }
 
 
-    public GridPosition randomStartPosition() {
+    private GridPosition randomStartPosition() {
 
         int startColumn = (int) (Math.random() * (grid.getCols() - widthColumns)); // changed it
-        // 60(width in pixels heads) / 3 (cellsize); "objects need 20 columns space"
-        return new GridPosition(startColumn, 0, grid);
-
+        // 60(width in pixels heads) / 3 (cell size); "objects need 20 columns space"
+        return new GridPosition(startColumn, 0);
     }
 
-    protected void init() throws InterruptedException{
+    public void init() throws InterruptedException {
+
         gridPosition = randomStartPosition();
-        picture = new Picture(grid.colToX(gridPosition.getCol()), 10,pictureLink);
+        Picture picture = new Picture(grid.colToX(gridPosition.getCol()), 10, pictureLink);
         picture.draw();
-        for (int x = 0; x < grid.getRows()-10; x++) {
+
+        for (int x = 0; x < grid.getRows() - 10; x++) {
 
             gridPosition.setPos(gridPosition.getCol(), gridPosition.getRow() + 1);
-            if (gridPosition.getRow() < grid.getRows()- 20){
-                try{
+
+            if (gridPosition.getRow() < grid.getRows() - 20) {
+
+                try {
+
                     picture.translate(0, grid.getCellSize());
-                }catch (ConcurrentModificationException c){
+                } catch (ConcurrentModificationException c) {
+
                     //TEMPORARY FIX
                     picture.delete();
+                    picture.draw();
                 }
             }
+
             if (gridPosition.getRow() == (grid.getRows() - (picture.getHeight() / grid.getCellSize()))) {
                 picture.delete();
                 break;
             }
+
             Thread.sleep(speed);
         }
 
     }
 
-    protected int getPoints() {
+    public int getPoints() {
 
         return points;
-
     }
 
 
     public int getCol() {
 
         return gridPosition.getCol();
-
     }
 
     public int getWidthColumns() {
+
         return widthColumns;
     }
 }

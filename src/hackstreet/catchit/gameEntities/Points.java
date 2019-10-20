@@ -1,4 +1,4 @@
-package hackstreet.catchit;
+package hackstreet.catchit.gameEntities;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -7,24 +7,23 @@ import org.academiadecodigo.simplegraphics.graphics.Text;
 public class Points {
 
     private Text text;
-    private Grid grid;
     private int points;
 
-    public Points (Grid grid){
-        this.grid = grid;
-    }
 
-    public void init(){
+    public void init() {
 
-        text = new Text(1000,50, "POINTS: 0");
+        text = new Text(1000, 50, "POINTS: 0");
         text.setColor(Color.BLACK);
-        text.grow(60,50);
+        text.grow(60, 50);
         text.draw();
     }
 
-    public void updatePoints(int points){
+    public void updatePoints(int points) {
+
         this.points += points;
-        if (this.points < 0){
+
+        if (this.points < 0) {
+
             text.setColor(Color.RED);
             text.setText("POINTS: " + this.points);
             return;
@@ -32,10 +31,6 @@ public class Points {
 
         text.setColor(Color.BLACK);
         text.setText("POINTS: " + this.points);
-    }
-
-    public int getPoints(){
-        return points;
     }
 
 }
